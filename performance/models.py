@@ -1,6 +1,17 @@
+import os
+import uuid
+
 from django.db import models
 from django.conf import settings
+from django.utils.text import slugify
 from django.core.exceptions import ValidationError
+
+
+def play_image_file_path(instance, filename):
+    _, extension = os.path.splitext(filename)
+    filename = f"{slugify(instance.title)}-{uuid.uuid4()}{extension}"
+
+    return os.path.join("uploads/plays/", filename)
 
 
 class Actor(models.Model):
@@ -49,13 +60,15 @@ class Play(models.Model):
     description = models.TextField()
     genres = models.ManyToManyField(
         to=Genre,
-        on_delete=models.DO_NOTHING,
         related_name="plays"
     )
     actors = models.ManyToManyField(
         to=Actor,
-        on_delete=models.DO_NOTHING,
         related_name="plays"
+    )
+    image = models.ImageField(
+        null=True,
+        upload_to=play_image_file_path
     )
 
     class Meta:
@@ -140,5 +153,5 @@ class Ticket(models.Model):
         )
 
     class Meta:
-        unique_together = ("movie_session", "row", "seat")
+        unique_together = ("performance", "row", "seat")
         ordering = ["row", "seat"]

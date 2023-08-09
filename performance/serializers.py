@@ -46,7 +46,7 @@ class PlayListSerializer(PlaySerializer):
 
     class Meta:
         model = Play
-        fields = ("id", "title", "genres", "actors")
+        fields = ("id", "title", "genres", "actors", "image")
 
 
 class PlayDetailSerializer(PlaySerializer):
@@ -62,7 +62,14 @@ class PlayDetailSerializer(PlaySerializer):
             "description",
             "genres",
             "actors",
+            "image"
         )
+
+
+class PlayImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Play
+        fields = ("id", "image")
 
 
 class PerformanceSerializer(serializers.ModelSerializer):
@@ -73,7 +80,10 @@ class PerformanceSerializer(serializers.ModelSerializer):
 
 class PerformanceListSerializer(PerformanceSerializer):
     play_title = serializers.CharField(source="play.title", read_only=True)
-    theatre_hall_name = serializers.CharField(source="theatre_hall.name", read_only=True)
+    movie_image = serializers.ImageField(source="movie.image", read_only=True)
+    theatre_hall_name = serializers.CharField(
+        source="theatre_hall.name", read_only=True
+    )
     theatre_hall_capacity = serializers.IntegerField(
         source="theatre_hall.capacity", read_only=True
     )
@@ -85,6 +95,7 @@ class PerformanceListSerializer(PerformanceSerializer):
             "id",
             "show_time",
             "play_title",
+            "movie_image",
             "theatre_hall_name",
             "theatre_hall_capacity",
             "tickets_available",
@@ -97,18 +108,18 @@ class TicketSerializer(serializers.ModelSerializer):
         Ticket.validate_ticket(
             attrs["row"],
             attrs["seat"],
-            attrs["movie_session"].cinema_hall,
+            attrs["performance"].cinema_hall,
             ValidationError
         )
         return data
 
     class Meta:
         model = Ticket
-        fields = ("id", "row", "seat", "movie_session")
+        fields = ("id", "row", "seat", "performance")
 
 
 class TicketListSerializer(TicketSerializer):
-    movie_session = PerformanceListSerializer(many=False, read_only=True)
+    performance = PerformanceListSerializer(many=False, read_only=True)
 
 
 class TicketSeatsSerializer(TicketSerializer):
@@ -121,7 +132,7 @@ class PerformanceDetailSerializer(PerformanceSerializer):
     play = PlayListSerializer(many=True, read_only=True)
     theatre_hall = TheatreHallSerializer(many=False, read_only=True)
     taken_place = TicketSeatsSerializer(
-        suorce="tickets", many=True, read_only=True
+        source="tickets", many=True, read_only=True
     )
 
     class Meta:
