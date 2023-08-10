@@ -107,8 +107,11 @@ class AuthenticatedplayViewSet(TestCase):
         play_with_genre2 = self.play2.genres.add(self.genre2)
         play_without_genre = self.play3
 
-        result = self.client.get(PLAY_URL,
-                                 {"genres": f"{self.genre1.id},{self.genre2.id}"})
+        result = self.client.get(
+            PLAY_URL,
+            {"genres": f"{self.genre1.id},"
+                       f"{self.genre2.id}"}
+        )
 
         serializer1 = PlayListSerializer(play_with_genre1)
         serializer2 = PlayListSerializer(play_with_genre2)
@@ -123,8 +126,11 @@ class AuthenticatedplayViewSet(TestCase):
         play_with_actor2 = self.play1.actors.add(self.actor2)
         play_without_actor = self.play3
 
-        result = self.client.get(PLAY_URL,
-                                 {"actors": f"{self.actor1.id},{self.actor2.id}"})
+        result = self.client.get(
+            PLAY_URL,
+            {"actors": f"{self.actor1.id},"
+                       f"{self.actor2.id}"}
+        )
 
         serializer1 = PlayListSerializer(play_with_actor1)
         serializer2 = PlayListSerializer(play_with_actor2)
@@ -167,7 +173,10 @@ class AdminplayApiTest(TestCase):
 
         self.play1 = sample_play(title="play1")
         self.genre1 = sample_genre(name="genre1")
-        self.actor1 = sample_actor(first_name="first_one", last_name="last_one")
+        self.actor1 = sample_actor(
+            first_name="first_one",
+            last_name="last_one"
+        )
 
         self.client.force_authenticate(self.user)
 
@@ -190,4 +199,7 @@ class AdminplayApiTest(TestCase):
 
         result = self.client.delete(url)
 
-        self.assertEqual(result.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        self.assertEqual(
+            result.status_code,
+            status.HTTP_405_METHOD_NOT_ALLOWED
+        )

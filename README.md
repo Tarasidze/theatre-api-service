@@ -25,7 +25,7 @@ Theatre API Service is designed to streamline the management of Theatre-related 
 1. Clone the repository:
 
    ```
-   https://github.com/Tarasidze/theatre-api-service
+   git clone https://github.com/Tarasidze/theatre-api-service
    ```
 2. Create .env file and define environmental variables followin .env.example:
    ```
