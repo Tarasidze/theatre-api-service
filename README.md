@@ -42,8 +42,6 @@ Theatre API Service is designed to streamline the management of Theatre-related 
    docker-compose up --build
    ```
 4. App will be available at: ```127.0.0.1:8000```
-5. Login using next credentials:
-   ```
 
 ## Credentials
 ```
