@@ -61,12 +61,12 @@ def sample_performance(**params):
     return Performance.objects.create(**defaults)
 
 
-def image_upload_url(movie_id):
-    return reverse("performance:play-upload-image", args=[movie_id])
+def image_upload_url(play_id):
+    return reverse("performance:play-upload-image", args=[play_id])
 
 
-def detail_url(movie_id):
-    return reverse("performance:play-detail", args=[movie_id])
+def detail_url(play_id):
+    return reverse("performance:play-detail", args=[play_id])
 
 
 class PlayImageUploadTests(TestCase):
@@ -86,7 +86,7 @@ class PlayImageUploadTests(TestCase):
         self.play.image.delete()
 
     def test_upload_image_to_play(self):
-        """Test uploading an image to movie"""
+        """Test uploading an image to play"""
         url = image_upload_url(self.play.id)
         with tempfile.NamedTemporaryFile(suffix=".jpg") as ntf:
             img = Image.new("RGB", (10, 10))
@@ -124,8 +124,8 @@ class PlayImageUploadTests(TestCase):
             )
 
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
-        movie = Play.objects.get(title="Title")
-        self.assertFalse(movie.image)
+        play = Play.objects.get(title="Title")
+        self.assertFalse(play.image)
 
     def test_image_url_is_shown_on_play_detail(self):
         url = image_upload_url(self.play.id)
@@ -159,3 +159,6 @@ class PlayImageUploadTests(TestCase):
         res = self.client.get(PERFORMANCE_URL)
 
         self.assertIn("play_image", res.data[0].keys())
+
+
+

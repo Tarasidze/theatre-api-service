@@ -81,7 +81,7 @@ class PlayViewSet(
         return [int(str_id) for str_id in qs.split(",")]
 
     def get_queryset(self):
-        """Retrieve the movies with filters"""
+        """Retrieve the plays with filters"""
         title = self.request.query_params.get("title")
         genres = self.request.query_params.get("genres")
         actors = self.request.query_params.get("actors")
@@ -120,7 +120,7 @@ class PlayViewSet(
         permission_classes=[IsAdminUser],
     )
     def upload_image(self, request, pk=None):
-        """Endpoint for uploading image to specific movie"""
+        """Endpoint for uploading image to specific play"""
         play = self.get_object()
         serializer = self.get_serializer(play, data=request.data)
 
@@ -145,7 +145,7 @@ class PlayViewSet(
             OpenApiParameter(
                 "title",
                 type=OpenApiTypes.STR,
-                description="Filter by movie title (ex. ?title=drama)",
+                description="Filter by play title (ex. ?title=drama)",
             ),
         ]
     )
