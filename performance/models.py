@@ -68,7 +68,8 @@ class Play(models.Model):
     )
     image = models.ImageField(
         null=True,
-        upload_to=play_image_file_path
+        upload_to=play_image_file_path,
+        blank=True
     )
 
     class Meta:

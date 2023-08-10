@@ -178,7 +178,7 @@ class PerformanceViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(show_time__date=date)
 
         if play_id_str:
-            queryset = queryset.filter(movie_id=int(play_id_str))
+            queryset = queryset.filter(play__id=int(play_id_str))
 
         return queryset
 
