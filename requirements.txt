@@ -3,6 +3,7 @@ attrs==23.1.0
 black==23.7.0
 click==8.1.6
 colorama==0.4.6
+decouple==0.0.7
 Django==4.2.4
 django-debug-toolbar==4.1.0
 django-rest-framework==0.1.0
