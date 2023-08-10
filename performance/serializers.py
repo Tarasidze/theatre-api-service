@@ -58,7 +58,6 @@ class PlayDetailSerializer(PlaySerializer):
         fields = (
             "id",
             "title",
-            "duration",
             "description",
             "genres",
             "actors",
@@ -137,7 +136,7 @@ class PerformanceDetailSerializer(PerformanceSerializer):
 
     class Meta:
         model = Performance
-        fields = ("id", "show_time", "movie", "cinema_hall", "taken_places")
+        fields = ("id", "show_time", "play", "theatre_hall", "taken_place")
 
 
 class ReservationSerializer(serializers.ModelSerializer):
