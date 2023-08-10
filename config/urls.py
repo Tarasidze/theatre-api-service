@@ -12,6 +12,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("api/performance/", include("performance.urls", namespace="performance")),
     path("api/user/", include("user.urls", namespace="user")),
+
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
       "api/doc/swagger/",
@@ -23,4 +24,7 @@ urlpatterns = [
       SpectacularRedocView.as_view(url_name="schema"),
       name="redoc",
     ),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+    path("__debug__/", include("debug_toolbar.urls")),
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
