@@ -6,6 +6,7 @@ Theatre API Service is a Django-based REST API for managing theatre, plays, perf
 - [Introduction](#introduction)
 - [Feature](#features)
 - [Installation](#installation)
+- [Credentials](#credentials)
 - [API Endpoints](#endpoints)
 - [Schema](#schema)
 - [Screenshots](#screenshots)
@@ -43,10 +44,12 @@ Theatre API Service is designed to streamline the management of Theatre-related 
 4. App will be available at: ```127.0.0.1:8000```
 5. Login using next credentials:
    ```
-(in develop)
 
-   ```
+## Credentials
 ```
+   (in develop)
+```
+
 ## Endpoints
 ```
        /admin/: Django admin panel interface.
