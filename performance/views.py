@@ -102,6 +102,7 @@ class PlayViewSet(
         return queryset.distinct()
 
     def get_serializer_class(self):
+        """ get serializer depends on request"""
         if self.action == "list":
             return PlayListSerializer
 
@@ -168,6 +169,7 @@ class PerformanceViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAdminOrIfAuthenticatedReadOnly,)
 
     def get_queryset(self):
+        """Endpoint for uploading image to specific Performance"""
         date = self.request.query_params.get("date")
         play_id_str = self.request.query_params.get("play")
 
@@ -183,6 +185,7 @@ class PerformanceViewSet(viewsets.ModelViewSet):
         return queryset
 
     def get_serializer_class(self):
+        """ get serializer depends on request"""
         if self.action == "list":
             return PerformanceListSerializer
 
@@ -230,13 +233,16 @@ class ReservationViewSet(
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
+        """Retrieve the Reservation with filter by user"""
         return Reservation.objects.filter(user=self.request.user)
 
     def get_serializer_class(self):
+        """ get serializer depends on request"""
         if self.action == "list":
             return ReservationListSerializer
 
         return ReservationSerializer
 
     def perform_create(self, serializer):
+        """ Match user to response"""
         serializer.save(user=self.request.user)
