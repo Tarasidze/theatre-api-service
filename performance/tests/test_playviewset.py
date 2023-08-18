@@ -45,7 +45,7 @@ def sample_actor(**param) -> Actor:
     return Actor.objects.create(**defaults)
 
 
-class UnAuthenticatedPlayViesSet(TestCase):
+class UnauthenticatedPlayViewSetTest(TestCase):
     def setUp(self) -> None:
         self.client = APIClient()
 
@@ -54,7 +54,7 @@ class UnAuthenticatedPlayViesSet(TestCase):
         self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
-class AuthenticatedplayViewSet(TestCase):
+class AuthenticatedPlayViewSetTest(TestCase):
     def setUp(self) -> None:
         self.client = APIClient()
         self.user = get_user_model().objects.create_user(
@@ -102,7 +102,7 @@ class AuthenticatedplayViewSet(TestCase):
         self.assertIn(serializer2.data, result.data)
         self.assertNotIn(serializer3.data, result.data)
 
-    def play_filter_by_genre(self):
+    def test_play_filter_by_genre(self):
         play_with_genre1 = self.play1.genres.add(self.genre1)
         play_with_genre2 = self.play2.genres.add(self.genre2)
         play_without_genre = self.play3
@@ -121,7 +121,7 @@ class AuthenticatedplayViewSet(TestCase):
         self.assertIn(serializer2.data, result.data)
         self.assertNotIn(serializer3.data, result.data)
 
-    def movi_filter_by_actor(self):
+    def test_movi_filter_by_actor(self):
         play_with_actor1 = self.play1.actors.add(self.actor1)
         play_with_actor2 = self.play1.actors.add(self.actor2)
         play_without_actor = self.play3
@@ -162,7 +162,7 @@ class AuthenticatedplayViewSet(TestCase):
         self.assertEqual(result.status_code, status.HTTP_403_FORBIDDEN)
 
 
-class AdminplayApiTest(TestCase):
+class AdminPlayApiTest(TestCase):
     def setUp(self) -> None:
         self.client = APIClient()
         self.user = get_user_model().objects.create_user(
