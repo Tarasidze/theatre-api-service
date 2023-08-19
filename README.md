@@ -5,8 +5,8 @@ Theatre API Service is a Django-based REST API for managing theatre, plays, perf
 ## Table of Contents
 - [Introduction](#introduction)
 - [Feature](#features)
+- [Requirements](#requirements)
 - [Installation](#installation)
-- [Credentials](#credentials)
 - [API Endpoints](#endpoints)
 - [Schema](#schema)
 - [Screenshots](#screenshots)
@@ -19,6 +19,13 @@ Theatre API Service is designed to streamline the management of Theatre-related 
 - CRUD operations for actors, genres, performance, plays, and tickets.
 - Add images for plays
 - Ticket validation based on rows and seats availability.
+
+## Requirements
+
+Before you begin, ensure you have the following installed:
+
+-   Docker: [Install Docker](https://docs.docker.com/get-docker/)
+-   PostgreSQL: [Install PostgreSQL](https://www.postgresql.org/download/) 
 
 ## Installation
 
@@ -43,10 +50,6 @@ Theatre API Service is designed to streamline the management of Theatre-related 
    ```
 4. App will be available at: ```127.0.0.1:8000```
 
-## Credentials
-```
-   (in develop)
-```
 
 ## Endpoints
 ```
@@ -90,8 +93,15 @@ Theatre API Service is designed to streamline the management of Theatre-related 
 ```
 
 ## Schema
-(in develop)
+![Schema](theatre_shema.png)
 
 ## Screenshots
 ![Demo Interface](Screenshot_demo_1.png)
 ![Demo Interface](Screenshot_demo_2.png)
+![Demo Interface](theatre_creen_3.png)
+![Demo Interface](theatre_creen_4.png)
+![Demo Interface](theatre_creen_6.png)
+![Demo Interface](theatre_creen_7.png)
+
+
+
