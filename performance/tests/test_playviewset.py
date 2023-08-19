@@ -121,9 +121,9 @@ class AuthenticatedPlayViewSetTest(TestCase):
         self.assertIn(serializer2.data, result.data)
         self.assertNotIn(serializer3.data, result.data)
 
-    def test_movi_filter_by_actor(self):
+    def test_play_filter_by_actor(self):
         play_with_actor1 = self.play1.actors.add(self.actor1)
-        play_with_actor2 = self.play1.actors.add(self.actor2)
+        play_with_actor2 = self.play2.actors.add(self.actor2)
         play_without_actor = self.play3
 
         result = self.client.get(

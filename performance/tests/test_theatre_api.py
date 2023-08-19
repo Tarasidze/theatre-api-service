@@ -1,13 +1,13 @@
 import os
 import tempfile
 
-from django.urls import reverse
+from PIL import Image
 from django.contrib.auth import get_user_model
 from django.test import TestCase
-from rest_framework import status
-from rest_framework.test import APIClient
+from django.urls import reverse
 
-from PIL import Image
+from rest_framework.test import APIClient
+from rest_framework import status
 
 from performance.models import (
     Play,
