@@ -9,6 +9,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
+from django.db.models.query import QuerySet
 
 from performance.models import (
     Performance,
@@ -76,11 +77,11 @@ class PlayViewSet(
     permission_classes = (IsAdminOrIfAuthenticatedReadOnly,)
 
     @staticmethod
-    def _params_to_ints(qs):
+    def _params_to_ints(qs) -> list:
         """Converts a list of string IDs to a list of integers"""
         return [int(str_id) for str_id in qs.split(",")]
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         """Retrieve the plays with filters"""
         title = self.request.query_params.get("title")
         genres = self.request.query_params.get("genres")
@@ -168,7 +169,7 @@ class PerformanceViewSet(viewsets.ModelViewSet):
     serializer_class = PerformanceSerializer
     permission_classes = (IsAdminOrIfAuthenticatedReadOnly,)
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         """Endpoint for uploading image to specific Performance"""
         date = self.request.query_params.get("date")
         play_id_str = self.request.query_params.get("play")
@@ -232,7 +233,7 @@ class ReservationViewSet(
     pagination_class = ReservationPagination
     permission_classes = (IsAuthenticated,)
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         """Retrieve the Reservation with filter by user"""
         return Reservation.objects.filter(user=self.request.user)
 
