@@ -1,0 +1,5 @@
+.gitignore
+.github
+venv/
+theatre.sqlite3
+__pycache__
